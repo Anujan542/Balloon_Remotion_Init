@@ -1,62 +1,70 @@
-import {spring} from 'remotion';
-import {
-	AbsoluteFill,
-	interpolate,
-	Sequence,
-	useCurrentFrame,
-	useVideoConfig,
-} from 'remotion';
-import {Logo} from './HelloWorld/Logo';
-import {Subtitle} from './HelloWorld/Subtitle';
-import {Title} from './HelloWorld/Title';
+import {AbsoluteFill, Sequence} from 'remotion';
+import {FadeTransition} from './components/Effects/FadeTransition';
+import BalloonEffect from './components/FirstLayer/BalloonEffect';
+import Balloons from './components/Effects/Balloons';
+import Image from './components/FirstLayer/Image';
+import {ParagraphTitle} from './components/FirstLayer/ParagraphTitle';
+import UnderScorePath from './components/FirstLayer/UnderScorePath';
+import Intro from './components/Intro/Intro';
+import BalloonTest from './components/FirstLayer/BalloonTest';
 
-export const HelloWorld = ({titleText, titleColor}) => {
-	const frame = useCurrentFrame();
-	const {durationInFrames, fps} = useVideoConfig();
-
-	// Animate from 0 to 1 after 25 frames
-	const logoTranslationProgress = spring({
-		frame: frame - 25,
-		fps,
-		config: {
-			damping: 100,
-		},
-	});
-
-	// Move the logo up by 150 pixels once the transition starts
-	const logoTranslation = interpolate(
-		logoTranslationProgress,
-		[0, 1],
-		[0, -150]
-	);
-
-	// Fade out the animation at the end
-	const opacity = interpolate(
-		frame,
-		[durationInFrames - 25, durationInFrames - 15],
-		[1, 0],
-		{
-			extrapolateLeft: 'clamp',
-			extrapolateRight: 'clamp',
-		}
-	);
-
-	// A <AbsoluteFill> is just a absolutely positioned <div>!
+export const BalloonTemplate = () => {
 	return (
-		<AbsoluteFill style={{backgroundColor: 'white'}}>
-			<AbsoluteFill style={{opacity}}>
-				<AbsoluteFill style={{transform: `translateY(${logoTranslation}px)`}}>
-					<Logo />
-				</AbsoluteFill>
-				{/* Sequences can shift the time for its children! */}
-				<Sequence from={35}>
-					<Title titleText={titleText} titleColor={titleColor} />
-				</Sequence>
-				{/* The subtitle will only enter on the 75th frame. */}
-				<Sequence from={75}>
-					<Subtitle />
-				</Sequence>
-			</AbsoluteFill>
+		<AbsoluteFill style={{display: 'flex', backgroundColor: '#110f0ff3'}}>
+			<Sequence from={0} durationInFrames={130}>
+				<Intro />
+			</Sequence>
+			<Sequence from={128} durationInFrames={302}>
+				<FadeTransition type="in" duration={30}>
+					{/* <BalloonEffect color1="#567d2e" color2="#ffb300" /> */}
+					<BalloonTest color1="#567d2e" color2="#ffb300" />
+				</FadeTransition>
+			</Sequence>
+			<Sequence from={150} durationInFrames={280}>
+				<Image />
+			</Sequence>
+			<Sequence from={200} durationInFrames={230}>
+				<UnderScorePath color="white" />
+			</Sequence>
+			<Sequence from={250} durationInFrames={180}>
+				<ParagraphTitle
+					x={2}
+					y={1150}
+					text="Thank you to my family for the endless support throughout my"
+					marginLeft="10rem"
+					titleColor="white"
+					titleText="Bachelor of Science"
+					size="35px"
+					fontWeight={0}
+				/>
+			</Sequence>
+			<Sequence from={270} durationInFrames={160}>
+				<ParagraphTitle
+					x={2}
+					y={1250}
+					text="undergrad career. Im also thankful for my friends who helped get me"
+					marginLeft="8rem"
+					titleColor="white"
+					titleText="Bachelor of Science"
+					size="35px"
+					fontWeight={0}
+				/>
+			</Sequence>
+			<Sequence from={290} durationInFrames={140}>
+				<ParagraphTitle
+					x={2}
+					y={1350}
+					text="here <3"
+					marginLeft="35rem"
+					titleColor="white"
+					titleText="Bachelor of Science"
+					size="35px"
+					fontWeight={0}
+				/>
+			</Sequence>
+			<Sequence from={420} durationInFrames={10}>
+				<Balloons color1="#567d2e" color2="#ffb300" />
+			</Sequence>
 		</AbsoluteFill>
 	);
 };
