@@ -10,8 +10,9 @@
 	height: 330px;
 	width: 300px;
 	border-radius: 80% 80% 80% 80%;
-	background-color: red;
+	/* background-color: red; */
 	position: relative;
+
 	margin: 0 5px;
 }
 
@@ -36,7 +37,7 @@
 	top: 330px;
 	position: absolute;
 	height: 700px;
-	width: 5px;
+	width: 10px;
 	margin-left: 143px;
 	content: '';
 }
