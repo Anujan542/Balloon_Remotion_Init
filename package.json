@@ -13,6 +13,7 @@
   "dependencies": {
     "@remotion/cli": "^3.0.0",
     "@remotion/eslint-config": "^3.0.0",
+    "animate.css": "^4.1.1",
     "eslint": "^8.14.0",
     "prettier": "^2.6.2",
     "react": "^18.0.0",

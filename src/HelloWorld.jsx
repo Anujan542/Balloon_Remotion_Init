@@ -7,6 +7,9 @@ import {ParagraphTitle} from './components/FirstLayer/ParagraphTitle';
 import UnderScorePath from './components/FirstLayer/UnderScorePath';
 import Intro from './components/Intro/Intro';
 import BalloonTest from './components/FirstLayer/BalloonTest';
+import Balloon1 from './components/FirstLayer/Balloons/Balloon1';
+import Balloon2 from './components/FirstLayer/Balloons/Balloon2';
+import Balloon3 from './components/FirstLayer/Balloons/Balloon3';
 
 export const BalloonTemplate = () => {
 	return (
@@ -17,8 +20,14 @@ export const BalloonTemplate = () => {
 			<Sequence from={128} durationInFrames={302}>
 				<FadeTransition type="in" duration={30}>
 					{/* <BalloonEffect color1="#567d2e" color2="#ffb300" /> */}
-					<BalloonTest color1="#567d2e" color2="#ffb300" />
+					<Balloon1 color1="#567d2e" />
 				</FadeTransition>
+			</Sequence>
+			<Sequence from={140} durationInFrames={290}>
+				<Balloon2 color2="#ffb300" />
+			</Sequence>
+			<Sequence from={150} durationInFrames={280}>
+				<Balloon3 />
 			</Sequence>
 			<Sequence from={150} durationInFrames={280}>
 				<Image />
